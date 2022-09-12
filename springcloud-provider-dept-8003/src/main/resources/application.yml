@@ -1,0 +1,38 @@
+server:
+  port: 8003
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.ming.springcloud.pojo
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#spring配置
+spring:
+  application:
+    name: springcloud-provider-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db03?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+#eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept8003 #修改eureka上的默认描述信息
+
+#info配置
+info:
+  app.name: ming-springcloud
+  company.name: ming.com
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

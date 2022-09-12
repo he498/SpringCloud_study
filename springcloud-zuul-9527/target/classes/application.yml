@@ -1,0 +1,33 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: springcloud-zuul
+  cloud:
+    gateway:
+      routes:
+        - id: eureka-client-gateway
+          uri: http://localhost:8001
+          predicates:
+            - Path=/dept/get/**
+  main:
+    web-application-type: reactive
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: zuul9527.com
+    prefer-ip-address: true
+#info配置
+info:
+  app.name: ming-springcloud
+  company.name: ming.com
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
